@@ -1,0 +1,102 @@
+﻿@model IEnumerable<Letovi.Models.PopisLetova>
+
+@{
+    ViewBag.Title = "Pretraga";
+    var viewModel = ViewBag.Iata.Items;
+}
+
+<br>
+
+<div class="col-sm-12">
+    <form class="form" id="pretrezivanje" method="GET"
+          action="/PopisLetova/Pretraga">
+        <div class="form-group col-md-4">
+            <label>Polazni aerodrom: </label>
+            @Html.DropDownList("polazniAerodrom", (SelectList)ViewData["Iata"], "", new { required = "required" })
+        </div>
+        <div class="form-group col-md-4">
+            <label>Odredišni aerodrom: </label>
+            @Html.DropDownList("odredisniAerodrom", (SelectList)ViewData["Iata"], "", new { required = "required" })
+        </div>
+
+        <div class="form-group col-md-4">
+            <label>Datum polaska: </label>
+            <input required class="form-control" type="date" name="datumPutovanja" id="date" value="" />
+        </div>
+        <div>
+            <div class="form-group col-md-4">
+                <label>Broj odraslih: </label>
+                <input class="form-control" type="number" name="brojOdraslih" value="">
+            </div>
+            <div class="form-group col-md-4">
+                <label>Broj djece: </label>
+                <input class="form-control" type="number" name="brojDjece" value="">
+            </div>
+            <div class="form-group col-md-4">
+                <label>Valuta:</label>
+                <select class="form-control" name="valuta" data-width="100%">
+                    <option value="EUR">EUR</option>
+                    <option value="USD">USD</option>
+                    <option value="HRK">HRK</option>
+                </select>
+            </div>
+            <button class="btn btn-danger col-md-2" type="submit" value="Submit"> Pretraži </button>
+        </div>
+    </form>
+</div>
+<div id="rezultatDiv" class="col-sm-12">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PolazniAerodrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OdredisniAerodrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DatumPolaskaPovratka)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BrojPresjedanjaUOdlaznomPovratnomPutovanju)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BrojPutnika)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Valuta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UkupnaCijena)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PolazniAerodrom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OdredisniAerodrom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DatumPolaskaPovratka)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BrojPresjedanjaUOdlaznomPovratnomPutovanju)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BrojPutnika)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Valuta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UkupnaCijena)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
